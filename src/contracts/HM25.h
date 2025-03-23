@@ -1,4 +1,3 @@
-#include <string>
 using namespace QPI;
 
 struct HM252
@@ -43,8 +42,9 @@ private:
     // escrowStatus: 0 = Aguardando depósito, 1 = Depósito realizado, 2 = Fondos liberados, 3 = Transacción cancelada.
     uint64 escrowAmount;
     uint8 escrowStatus;
-    std::string buyerAddress;
-    std::string sellerAddress;
+    // Cambiamos el tipo de std::string a QPI::id para que coincida con el tipo devuelto por qpi.invocator()
+    QPI::id buyerAddress;
+    QPI::id sellerAddress;
     bool buyerConfirmed;
     bool sellerConfirmed;
 
@@ -175,7 +175,7 @@ private:
         state.escrowAmount = 0;
         state.escrowStatus = 0; // Aguardando depósito
         // Se fija la dirección del vendedor; en producción deberá establecerse dinámicamente o mediante parámetros.
-        state.sellerAddress = "seller_address";
+        state.sellerAddress = QPI::id("seller_address");
         state.buyerConfirmed = false;
         state.sellerConfirmed = false;
     _
