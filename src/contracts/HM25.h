@@ -42,7 +42,6 @@ private:
     // escrowStatus: 0 = Aguardando depósito, 1 = Depósito realizado, 2 = Fondos liberados, 3 = Transacción cancelada.
     uint64 escrowAmount;
     uint8 escrowStatus;
-    // Cambiamos el tipo de std::string a QPI::id para que coincida con el tipo devuelto por qpi.invocator()
     QPI::id buyerAddress;
     QPI::id sellerAddress;
     bool buyerConfirmed;
@@ -174,8 +173,8 @@ private:
         state.numberOfBurnCalls = 0;
         state.escrowAmount = 0;
         state.escrowStatus = 0; // Aguardando depósito
-        // Se fija la dirección del vendedor; en producción deberá establecerse dinámicamente o mediante parámetros.
-        state.sellerAddress = QPI::id("seller_address");
+        // Se fija la dirección del vendedor; en producción se debe establecer dinámicamente o mediante parámetros.
+        state.sellerAddress = QPI::id((const unsigned char*)"seller_address");
         state.buyerConfirmed = false;
         state.sellerConfirmed = false;
     _
